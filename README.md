@@ -1,5 +1,7 @@
 # Orc.AutomaticSupport
 
+[![Join the chat at https://gitter.im/WildGums/Orc.AutomaticSupport](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/WildGums/Orc.AutomaticSupport?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Allows the user to easily download a remote file that will validate and provide automatic support to the end-user.
 
 ## Initializing the service
