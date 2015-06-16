@@ -21,6 +21,8 @@ namespace Orc.AutomaticSupport
         /// <value>The support URL.</value>
         string SupportUrl { get; set; }
 
+        string CommandLineParameters { get; set; }
+
         /// <summary>
         /// Occurs when the download progress has changed.
         /// </summary>

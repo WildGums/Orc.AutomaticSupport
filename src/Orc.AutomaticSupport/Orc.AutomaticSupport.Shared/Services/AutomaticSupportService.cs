@@ -32,9 +32,12 @@ namespace Orc.AutomaticSupport
             _dispatcherService = dispatcherService;
 
             _startedTime = DateTime.Now;
+            CommandLineParameters = string.Empty;
         }
 
         public string SupportUrl { get; set; }
+
+        public string CommandLineParameters { get; set; }
 
         public event EventHandler<ProgressChangedEventArgs> DownloadProgressChanged;
         public event EventHandler<EventArgs> DownloadCompleted;
@@ -70,7 +73,7 @@ namespace Orc.AutomaticSupport
 
             Log.Info("Running support app");
 
-            _processService.StartProcess(tempFile, processCompletedCallback: exitCode =>
+            _processService.StartProcess(tempFile, CommandLineParameters, exitCode =>
             {
                 _dispatcherService.BeginInvoke(() => SupportAppClosed.SafeInvoke(this));
             });
