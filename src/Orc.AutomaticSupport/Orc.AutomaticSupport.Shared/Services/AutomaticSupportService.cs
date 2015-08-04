@@ -43,7 +43,7 @@ namespace Orc.AutomaticSupport
         public event EventHandler<EventArgs> DownloadCompleted;
         public event EventHandler<EventArgs> SupportAppClosed;
 
-        public async Task DownloadAndRun()
+        public async Task DownloadAndRunAsync()
         {
             if (string.IsNullOrWhiteSpace(SupportUrl))
             {

@@ -11,6 +11,7 @@ namespace Orc.AutomaticSupport.ViewModels
     using System.Threading.Tasks;
     using Catel;
     using Catel.MVVM;
+    using Catel.Threading;
 
     public class RequestSupportViewModel : ViewModelBase
     {
@@ -29,16 +30,16 @@ namespace Orc.AutomaticSupport.ViewModels
 
         public TimeSpan RemainingTime { get; set; }
 
-        protected override async Task Initialize()
+        protected override async Task InitializeAsync()
         {
-            await base.Initialize();
+            await base.InitializeAsync();
 
             _automaticSupportService.DownloadProgressChanged += OnAutomaticSupportServiceDownloadProgressChanged;
             _automaticSupportService.SupportAppClosed += OnAutomaticSupportClosed;
 
             // Note: don't await, let it run by itself
 #pragma warning disable 4014
-            _automaticSupportService.DownloadAndRun();
+            await _automaticSupportService.DownloadAndRunAsync();
 #pragma warning restore 4014
         }
 
@@ -56,11 +57,9 @@ namespace Orc.AutomaticSupport.ViewModels
             RemainingTime = e.RemainingTime;
         }
 
-        private void OnAutomaticSupportClosed(object sender, EventArgs e)
+        private async void OnAutomaticSupportClosed(object sender, EventArgs e)
         {
-#pragma warning disable 4014
-            CloseViewModel(true);
-#pragma warning restore 4014
+            await CloseViewModel(true);
         }
     }
 }

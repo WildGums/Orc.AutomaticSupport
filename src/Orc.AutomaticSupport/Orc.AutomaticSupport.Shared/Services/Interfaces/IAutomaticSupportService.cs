@@ -42,6 +42,6 @@ namespace Orc.AutomaticSupport
         /// Downloads the support url file and runs the application.
         /// </summary>
         /// <returns>Task.</returns>
-        Task DownloadAndRun();
+        Task DownloadAndRunAsync();
     }
 }
