@@ -39,16 +39,16 @@ namespace Orc.AutomaticSupport.ViewModels
 
             // Note: don't await, let it run by itself
 #pragma warning disable 4014
-            await _automaticSupportService.DownloadAndRunAsync();
+            _automaticSupportService.DownloadAndRunAsync();
 #pragma warning restore 4014
         }
 
-        protected override async Task Close()
+        protected override async Task CloseAsync()
         {
             _automaticSupportService.DownloadProgressChanged -= OnAutomaticSupportServiceDownloadProgressChanged;
             _automaticSupportService.SupportAppClosed -= OnAutomaticSupportClosed;
 
-            await base.Close();
+            await base.CloseAsync();
         }
 
         private void OnAutomaticSupportServiceDownloadProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -59,7 +59,7 @@ namespace Orc.AutomaticSupport.ViewModels
 
         private async void OnAutomaticSupportClosed(object sender, EventArgs e)
         {
-            await CloseViewModel(true);
+            await CloseViewModelAsync(true);
         }
     }
 }
