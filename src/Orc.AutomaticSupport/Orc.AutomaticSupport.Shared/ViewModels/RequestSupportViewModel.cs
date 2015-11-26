@@ -11,24 +11,28 @@ namespace Orc.AutomaticSupport.ViewModels
     using System.Threading.Tasks;
     using Catel;
     using Catel.MVVM;
+    using Catel.Services;
     using Catel.Threading;
 
     public class RequestSupportViewModel : ViewModelBase
     {
         private readonly IAutomaticSupportService _automaticSupportService;
+        private readonly ILanguageService _languageService;
 
-        public RequestSupportViewModel(IAutomaticSupportService automaticSupportService)
+        public RequestSupportViewModel(IAutomaticSupportService automaticSupportService, ILanguageService languageService)
         {
             Argument.IsNotNull(() => automaticSupportService);
+            Argument.IsNotNull(() => languageService);
 
             _automaticSupportService = automaticSupportService;
+            _languageService = languageService;
 
-            Title = "Automatic support";
+            Title = languageService.GetString("AutomaticSupport_AutomaticSupport");
         }
 
-        public int Progress { get; set; }
+        public int Progress { get; private set; }
 
-        public TimeSpan RemainingTime { get; set; }
+        public string RemainingTime { get; private set; }
 
         protected override async Task InitializeAsync()
         {
@@ -54,7 +58,7 @@ namespace Orc.AutomaticSupport.ViewModels
         private void OnAutomaticSupportServiceDownloadProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             Progress = e.Progress;
-            RemainingTime = e.RemainingTime;
+            RemainingTime = string.Format(_languageService.GetString("AutomaticSupport_RemainingTime"), e.RemainingTime);
         }
 
         private async void OnAutomaticSupportClosed(object sender, EventArgs e)

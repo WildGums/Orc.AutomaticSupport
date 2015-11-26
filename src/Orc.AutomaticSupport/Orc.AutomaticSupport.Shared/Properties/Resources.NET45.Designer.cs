@@ -59,5 +59,32 @@ namespace Orc.AutomaticSupport.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatic support.
+        /// </summary>
+        internal static string AutomaticSupport_AutomaticSupport {
+            get {
+                return ResourceManager.GetString("AutomaticSupport_AutomaticSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The software is currently downloading the automatic support application. Once it is ready, it will automatically run the support application in order to analyze the installed software and fix any problems it might find..
+        /// </summary>
+        internal static string AutomaticSupport_CurrentlyDownloading {
+            get {
+                return ResourceManager.GetString("AutomaticSupport_CurrentlyDownloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining time: {0}.
+        /// </summary>
+        internal static string AutomaticSupport_RemainingTime {
+            get {
+                return ResourceManager.GetString("AutomaticSupport_RemainingTime", resourceCulture);
+            }
+        }
     }
 }
