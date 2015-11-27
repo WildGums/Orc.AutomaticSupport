@@ -47,7 +47,7 @@ namespace Orc.AutomaticSupport
         {
             if (string.IsNullOrWhiteSpace(SupportUrl))
             {
-                Log.ErrorAndThrowException<InvalidOperationException>("Please initialize the service by setting the SupportUrl property");
+                throw Log.ErrorAndCreateException<InvalidOperationException>("Please initialize the service by setting the SupportUrl property");
             }
 
             Log.Info("Downloading support app from '{0}'", SupportUrl);
