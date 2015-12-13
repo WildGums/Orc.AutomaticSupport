@@ -13,16 +13,15 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0">
-            <TextBlock TextWrapping="Wrap">
-                The software is currently downloading the automatic support application. Once it is ready, it will automatically run the support
-                application in order to analyze the installed software and fix any problems it might find.
+            <TextBlock Text="{catel:LanguageBinding AutomaticSupport_CurrentlyDownloading}" TextWrapping="Wrap">
+
             </TextBlock>
         </Label>
 
         <ProgressBar Grid.Row="1" Minimum="0" Maximum="100" Value="{Binding Progress}" Height="20" />
 
         <Label Grid.Row="2">
-            <TextBlock Text="{Binding RemainingTime, StringFormat=Remaining time: {0}}" />
+            <TextBlock Text="{Binding RemainingTime}" />
         </Label>
     </Grid>
 </catel:Window>

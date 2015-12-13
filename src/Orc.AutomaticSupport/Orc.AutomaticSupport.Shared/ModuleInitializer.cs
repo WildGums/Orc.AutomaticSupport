@@ -1,4 +1,6 @@
 ﻿using Catel.IoC;
+using Catel.Services;
+using Catel.Services.Models;
 using Orc.AutomaticSupport;
 
 /// <summary>
@@ -14,5 +16,8 @@ public static class ModuleInitializer
         var serviceLocator = ServiceLocator.Default;
 
         serviceLocator.RegisterType<IAutomaticSupportService, AutomaticSupportService>();
+
+        var languageService = serviceLocator.ResolveType<ILanguageService>();
+        languageService.RegisterLanguageSource(new LanguageResourceSource("Orc.AutomaticSupport", "Orc.AutomaticSupport.Properties", "Resources"));
     }
 }
