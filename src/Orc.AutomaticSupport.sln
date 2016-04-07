@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.AutomaticSupport.NET40", "Orc.AutomaticSupport\Orc.AutomaticSupport.NET40\Orc.AutomaticSupport.NET40.csproj", "{31CE78CE-896E-43B5-AE7E-A6A4B9944AA4}"
 EndProject
@@ -12,11 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{3CC711D4-F
 		nuget.config = nuget.config
 		Orc.AutomaticSupport.sln.DotSettings = Orc.AutomaticSupport.sln.DotSettings
 		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{199C8479-5A41-4318-8129-FB56773099B9}"
-	ProjectSection(SolutionItems) = preProject
-		..\lib\repositories.config = ..\lib\repositories.config
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.AutomaticSupport.Tests.NET40", "Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.NET40\Orc.AutomaticSupport.Tests.NET40.csproj", "{A226D12E-9802-4364-B4F3-2CAAAE059DD4}"
@@ -33,13 +28,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.AutomaticSupport.NET45"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.AutomaticSupport.Tests.NET45", "Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.NET45\Orc.AutomaticSupport.Tests.NET45.csproj", "{98CFDE61-0912-4646-A2EE-AB09E3AB1543}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.AutomaticSupport.NET46", "Orc.AutomaticSupport\Orc.AutomaticSupport.NET46\Orc.AutomaticSupport.NET46.csproj", "{F24B5B69-291A-4276-8174-5BF82D3C9577}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.AutomaticSupport.Tests.NET46", "Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.NET46\Orc.AutomaticSupport.Tests.NET46.csproj", "{0EC4DA77-B588-4561-831A-F9336E446EC0}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Orc.AutomaticSupport\Orc.AutomaticSupport.Shared\Orc.AutomaticSupport.Shared.projitems*{f24b5b69-291a-4276-8174-5bf82d3c9577}*SharedItemsImports = 4
 		Orc.AutomaticSupport\Orc.AutomaticSupport.Shared\Orc.AutomaticSupport.Shared.projitems*{2df17927-6654-421c-83f9-db184f7d43f1}*SharedItemsImports = 4
 		Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.projitems*{a226d12e-9802-4364-b4f3-2caaae059dd4}*SharedItemsImports = 4
 		Orc.AutomaticSupport\Orc.AutomaticSupport.Shared\Orc.AutomaticSupport.Shared.projitems*{31ce78ce-896e-43b5-ae7e-a6a4b9944aa4}*SharedItemsImports = 4
 		Orc.AutomaticSupport\Orc.AutomaticSupport.Shared\Orc.AutomaticSupport.Shared.projitems*{5968a0f9-163d-4961-af5d-65d5e8dbdf1d}*SharedItemsImports = 13
 		Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.projitems*{98cfde61-0912-4646-a2ee-ab09e3ab1543}*SharedItemsImports = 4
+		Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.projitems*{0ec4da77-b588-4561-831a-f9336e446ec0}*SharedItemsImports = 4
 		Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.projitems*{5d23c1c2-96ca-4d69-a961-90c701302910}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +64,14 @@ Global
 		{98CFDE61-0912-4646-A2EE-AB09E3AB1543}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98CFDE61-0912-4646-A2EE-AB09E3AB1543}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98CFDE61-0912-4646-A2EE-AB09E3AB1543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F24B5B69-291A-4276-8174-5BF82D3C9577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F24B5B69-291A-4276-8174-5BF82D3C9577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F24B5B69-291A-4276-8174-5BF82D3C9577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F24B5B69-291A-4276-8174-5BF82D3C9577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,5 +85,7 @@ Global
 		{5D23C1C2-96CA-4D69-A961-90C701302910} = {115ACCD5-F608-4889-B702-7FC928799D10}
 		{2DF17927-6654-421C-83F9-DB184F7D43F1} = {CFBE1C01-F567-429F-A88E-6A1270F2D3C8}
 		{98CFDE61-0912-4646-A2EE-AB09E3AB1543} = {115ACCD5-F608-4889-B702-7FC928799D10}
+		{F24B5B69-291A-4276-8174-5BF82D3C9577} = {CFBE1C01-F567-429F-A88E-6A1270F2D3C8}
+		{0EC4DA77-B588-4561-831A-F9336E446EC0} = {115ACCD5-F608-4889-B702-7FC928799D10}
 	EndGlobalSection
 EndGlobal
