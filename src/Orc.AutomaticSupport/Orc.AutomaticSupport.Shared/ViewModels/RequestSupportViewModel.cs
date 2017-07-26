@@ -61,9 +61,11 @@ namespace Orc.AutomaticSupport.ViewModels
             RemainingTime = string.Format(_languageService.GetString("AutomaticSupport_RemainingTime"), e.RemainingTime);
         }
 
-        private async void OnAutomaticSupportClosed(object sender, EventArgs e)
+        private void OnAutomaticSupportClosed(object sender, EventArgs e)
         {
-            await CloseViewModelAsync(true);
+#pragma warning disable 4014
+            CloseViewModelAsync(true);
+#pragma warning restore 4014
         }
     }
 }
