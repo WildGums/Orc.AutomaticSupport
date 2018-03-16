@@ -7,58 +7,55 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E426EAD0-F37
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{3CC711D4-F114-4399-A440-711E40600B3B}"
 	ProjectSection(SolutionItems) = preProject
+		Directory.build.project.props = Directory.build.project.props
+		Directory.build.props = Directory.build.props
+		Directory.build.shared.explicit.props = Directory.build.shared.explicit.props
+		Directory.build.shared.implicit.props = Directory.build.shared.implicit.props
+		Directory.build.targets = Directory.build.targets
 		GlobalSuppressions.cs = GlobalSuppressions.cs
 		nuget.config = nuget.config
 		Orc.AutomaticSupport.sln.DotSettings = Orc.AutomaticSupport.sln.DotSettings
 		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.AutomaticSupport.Tests.NET47", "Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.NET47\Orc.AutomaticSupport.Tests.NET47.csproj", "{A226D12E-9802-4364-B4F3-2CAAAE059DD4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{CFBE1C01-F567-429F-A88E-6A1270F2D3C8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{115ACCD5-F608-4889-B702-7FC928799D10}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Orc.AutomaticSupport.Tests.Shared", "Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.shproj", "{5D23C1C2-96CA-4D69-A961-90C701302910}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.AutomaticSupport.Tests.NET46", "Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.NET46\Orc.AutomaticSupport.Tests.NET46.csproj", "{0EC4DA77-B588-4561-831A-F9336E446EC0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orc.AutomaticSupport", "Orc.AutomaticSupport\Orc.AutomaticSupport.csproj", "{11D948B7-BABB-4FC2-BA24-5E04A598CBBA}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Orc.AutomaticSupport.Tests.Shared", "Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.shproj", "{5D23C1C2-96CA-4D69-A961-90C701302910}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.AutomaticSupport.Tests.NET", "Orc.AutomaticSupport.Tests.NET\Orc.AutomaticSupport.Tests.NET.csproj", "{0EC4DA77-B588-4561-831A-F9336E446EC0}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.projitems*{0ec4da77-b588-4561-831a-f9336e446ec0}*SharedItemsImports = 4
-		Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.projitems*{5d23c1c2-96ca-4d69-a961-90c701302910}*SharedItemsImports = 13
-		Orc.AutomaticSupport.Tests\Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.projitems*{a226d12e-9802-4364-b4f3-2caaae059dd4}*SharedItemsImports = 4
+		Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.projitems*{0ec4da77-b588-4561-831a-f9336e446ec0}*SharedItemsImports = 4
+		Orc.AutomaticSupport.Tests.Shared\Orc.AutomaticSupport.Tests.Shared.projitems*{5d23c1c2-96ca-4d69-a961-90c701302910}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A226D12E-9802-4364-B4F3-2CAAAE059DD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A226D12E-9802-4364-B4F3-2CAAAE059DD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A226D12E-9802-4364-B4F3-2CAAAE059DD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A226D12E-9802-4364-B4F3-2CAAAE059DD4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11D948B7-BABB-4FC2-BA24-5E04A598CBBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11D948B7-BABB-4FC2-BA24-5E04A598CBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11D948B7-BABB-4FC2-BA24-5E04A598CBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11D948B7-BABB-4FC2-BA24-5E04A598CBBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC4DA77-B588-4561-831A-F9336E446EC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A226D12E-9802-4364-B4F3-2CAAAE059DD4} = {115ACCD5-F608-4889-B702-7FC928799D10}
 		{CFBE1C01-F567-429F-A88E-6A1270F2D3C8} = {E426EAD0-F378-4A3D-9BCD-E42CED54EEC7}
 		{115ACCD5-F608-4889-B702-7FC928799D10} = {E426EAD0-F378-4A3D-9BCD-E42CED54EEC7}
+		{11D948B7-BABB-4FC2-BA24-5E04A598CBBA} = {CFBE1C01-F567-429F-A88E-6A1270F2D3C8}
 		{5D23C1C2-96CA-4D69-A961-90C701302910} = {115ACCD5-F608-4889-B702-7FC928799D10}
 		{0EC4DA77-B588-4561-831A-F9336E446EC0} = {115ACCD5-F608-4889-B702-7FC928799D10}
-		{11D948B7-BABB-4FC2-BA24-5E04A598CBBA} = {CFBE1C01-F567-429F-A88E-6A1270F2D3C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4AF379FE-C707-4A5B-AE0B-AEEE3BE6765C}
