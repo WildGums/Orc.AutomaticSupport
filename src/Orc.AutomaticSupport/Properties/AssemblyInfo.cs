@@ -7,7 +7,8 @@
 
 using System.Reflection;
 using System.Resources;
-using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Markup;
 
 // All other assembly info is defined in SharedAssembly.cs
 
@@ -16,8 +17,21 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Orc.AutomaticSupport library")]
 [assembly: NeutralResourcesLanguage("en-US")]
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
+[assembly: XmlnsPrefix("http://schemas.wildgums.com/orc/automaticsupport", "orcautomaticsupport")]
+[assembly: XmlnsDefinition("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport")]
+//[assembly: XmlnsDefinition("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport.Behaviors")]
+//[assembly: XmlnsDefinition("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport.Controls")]
+//[assembly: XmlnsDefinition("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport.Converters")]
+//[assembly: XmlnsDefinition("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport.Fonts")]
+//[assembly: XmlnsDefinition("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport.Markup")]
+[assembly: XmlnsDefinition("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport.Views")]
+//[assembly: XmlnsDefinition("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport.Windows")]
 
-[assembly: ComVisible(false)]
+[assembly: ThemeInfo(
+    ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
+                                     //(used if a resource is not found in the page, 
+                                     // or application resource dictionaries)
+    ResourceDictionaryLocation.SourceAssembly //where the generic resource dictionary is located
+                                              //(used if a resource is not found in the page, 
+                                              // app, or any theme specific resource dictionaries)
+    )]
