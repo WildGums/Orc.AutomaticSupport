@@ -1,4 +1,4 @@
-<Project Sdk="MSBuild.Sdk.Extras/1.2.2">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net46;net47</TargetFrameworks>
     <AssemblyName>Orc.AutomaticSupport</AssemblyName>
@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- <PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.2" PrivateAssets="All" /> -->
+    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.2" PrivateAssets="all" />
     <PackageReference Include="Catel.Core" Version="5.4.0" />
     <PackageReference Include="Catel.MVVM" Version="5.4.0" />
     <PackageReference Include="Catel.Fody" Version="3.3.0" PrivateAssets="all" />
@@ -40,6 +40,7 @@
     <PackageReference Update="NETStandard.Library" Version="2.0.1" />
   </ItemGroup>
 
-  <!-- <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" /> -->
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
   <Import Project="$(MSBuildProjectDirectory)\..\Directory.build.shared.explicit.props" Condition="Exists('$(MSBuildProjectDirectory)\..\Directory.build.shared.explicit.props')" />
+  <Import Project="$(MSBuildProjectDirectory)\..\Directory.build.shared.mat.props" Condition="Exists('$(MSBuildProjectDirectory)\..\Directory.build.shared.mat.props')" />
 </Project>
