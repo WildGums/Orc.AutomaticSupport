@@ -14,22 +14,30 @@ namespace Orc.AutomaticSupport
     using Catel;
     using Catel.Logging;
     using Catel.Services;
+    using Orc.FileSystem;
 
     public class AutomaticSupportService : IAutomaticSupportService
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         private readonly IDispatcherService _dispatcherService;
+        private readonly IFileService _fileService;
+        private readonly IDirectoryService _directoryService;
         private readonly IProcessService _processService;
         private readonly DateTime _startedTime;
 
-        public AutomaticSupportService(IProcessService processService, IDispatcherService dispatcherService)
+        public AutomaticSupportService(IProcessService processService, IDispatcherService dispatcherService,
+            IFileService fileService, IDirectoryService directoryService)
         {
             Argument.IsNotNull(() => processService);
             Argument.IsNotNull(() => dispatcherService);
+            Argument.IsNotNull(() => fileService);
+            Argument.IsNotNull(() => directoryService);
 
             _processService = processService;
             _dispatcherService = dispatcherService;
+            _fileService = fileService;
+            _directoryService = directoryService;
 
             _startedTime = DateTime.Now;
             CommandLineParameters = string.Empty;
@@ -52,36 +60,34 @@ namespace Orc.AutomaticSupport
 
             Log.Info("Downloading support app from '{0}'", SupportUrl);
 
-            var webClient = new WebClient();
-
-            webClient.DownloadProgressChanged += OnWebClientOnDownloadProgressChanged;
-            webClient.DownloadDataCompleted += OnWebClientOnDownloadDataCompleted;
-
-            var data = await webClient.DownloadDataTaskAsync(SupportUrl);
-
-            Log.Info("Support app is downloaded, storing file in temporary folder");
-
-            var tempDirectory = Path.Combine(Path.GetTempPath(), "Orc_AutomaticSupport", DateTime.Now.ToString("yyyyMMddHHmmss"));
-            if (!Directory.Exists(tempDirectory))
+            using (var webClient = new WebClient())
             {
-                Directory.CreateDirectory(tempDirectory);
+                webClient.DownloadProgressChanged += OnWebClientOnDownloadProgressChanged;
+                webClient.DownloadDataCompleted += OnWebClientOnDownloadDataCompleted;
+
+                var data = await webClient.DownloadDataTaskAsync(SupportUrl);
+
+                Log.Info("Support app is downloaded, storing file in temporary folder");
+
+                var tempDirectory = Path.Combine(Path.GetTempPath(), "Orc_AutomaticSupport", DateTime.Now.ToString("yyyyMMddHHmmss"));
+                _directoryService.Create(tempDirectory);
+
+                var tempFile = Path.Combine(tempDirectory, "SupportApp.exe");
+
+                await _fileService.WriteAllBytesAsync(tempFile, data);
+
+                Log.Info("Running support app");
+
+                _processService.StartProcess(tempFile, CommandLineParameters, exitCode =>
+                {
+                    _dispatcherService.BeginInvoke(() => SupportAppClosed.SafeInvoke(this));
+                });
             }
-
-            var tempFile = Path.Combine(tempDirectory, "SupportApp.exe");
-
-            File.WriteAllBytes(tempFile, data);
-
-            Log.Info("Running support app");
-
-            _processService.StartProcess(tempFile, CommandLineParameters, exitCode =>
-            {
-                _dispatcherService.BeginInvoke(() => SupportAppClosed.SafeInvoke(this));
-            });
         }
 
         private void OnWebClientOnDownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
         {
-            var webClient = (WebClient) sender;
+            var webClient = (WebClient)sender;
 
             webClient.DownloadProgressChanged -= OnWebClientOnDownloadProgressChanged;
             webClient.DownloadDataCompleted -= OnWebClientOnDownloadDataCompleted;
@@ -97,19 +103,19 @@ namespace Orc.AutomaticSupport
 
         private TimeSpan CalculateEta(DateTime startedTime, int totalBytesToReceive, int bytesReceived)
         {
-            var duration = (int) (DateTime.Now - startedTime).TotalSeconds;
+            var duration = (int)(DateTime.Now - startedTime).TotalSeconds;
             if (duration == 0)
             {
                 return new TimeSpan(0, 0, 0);
             }
 
-            var bytesPerSecond = bytesReceived/duration;
+            var bytesPerSecond = bytesReceived / duration;
             if (bytesPerSecond == 0)
             {
                 return new TimeSpan(0, 0, 0);
             }
 
-            var secondsRemaining = (totalBytesToReceive - bytesReceived)/bytesPerSecond;
+            var secondsRemaining = (totalBytesToReceive - bytesReceived) / bytesPerSecond;
 
             return new TimeSpan(0, 0, secondsRemaining);
         }

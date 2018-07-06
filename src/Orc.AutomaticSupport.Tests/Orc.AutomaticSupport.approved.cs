@@ -12,7 +12,7 @@ namespace Orc.AutomaticSupport
 {
     public class AutomaticSupportService : Orc.AutomaticSupport.IAutomaticSupportService
     {
-        public AutomaticSupportService(Catel.Services.IProcessService processService, Catel.Services.IDispatcherService dispatcherService) { }
+        public AutomaticSupportService(Catel.Services.IProcessService processService, Catel.Services.IDispatcherService dispatcherService, Orc.FileSystem.IFileService fileService, Orc.FileSystem.IDirectoryService directoryService) { }
         public string CommandLineParameters { get; set; }
         public string SupportUrl { get; set; }
         public event System.EventHandler<System.EventArgs> DownloadCompleted;
