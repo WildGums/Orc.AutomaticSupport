@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="ru" original="ORC.AUTOMATICSUPPORT/PROPERTIES/RESOURCES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.6900.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="ORC.AUTOMATICSUPPORT/PROPERTIES/RESOURCES.RESX" datatype="resx">
+        <trans-unit id="AutomaticSupport_AutomaticSupport" translate="yes" xml:space="preserve">
+          <source>Automatic support</source>
+          <target state="new">Automatic support</target>
+        </trans-unit>
+        <trans-unit id="AutomaticSupport_CurrentlyDownloading" translate="yes" xml:space="preserve">
+          <source>The software is currently downloading the automatic support application. Once it is ready, it will automatically run the support application in order to analyze the installed software and fix any problems it might find.</source>
+          <target state="new">The software is currently downloading the automatic support application. Once it is ready, it will automatically run the support application in order to analyze the installed software and fix any problems it might find.</target>
+        </trans-unit>
+        <trans-unit id="AutomaticSupport_RemainingTime" translate="yes" xml:space="preserve">
+          <source>Remaining time: {0}</source>
+          <target state="new">Remaining time: {0}</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
