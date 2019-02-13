@@ -80,7 +80,7 @@ namespace Orc.AutomaticSupport
 
                 _processService.StartProcess(tempFile, CommandLineParameters, exitCode =>
                 {
-                    _dispatcherService.BeginInvoke(() => SupportAppClosed.SafeInvoke(this));
+                    _dispatcherService.BeginInvoke(() => SupportAppClosed?.Invoke(this, EventArgs.Empty));
                 });
             }
         }
@@ -92,13 +92,13 @@ namespace Orc.AutomaticSupport
             webClient.DownloadProgressChanged -= OnWebClientOnDownloadProgressChanged;
             webClient.DownloadDataCompleted -= OnWebClientOnDownloadDataCompleted;
 
-            DownloadCompleted.SafeInvoke(this);
+            DownloadCompleted?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnWebClientOnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             var remainingTime = CalculateEta(_startedTime, Convert.ToInt32(e.TotalBytesToReceive), Convert.ToInt32(e.BytesReceived));
-            DownloadProgressChanged.SafeInvoke(this, new ProgressChangedEventArgs(e.ProgressPercentage, remainingTime));
+            DownloadProgressChanged?.Invoke(this, new ProgressChangedEventArgs(e.ProgressPercentage, remainingTime));
         }
 
         private TimeSpan CalculateEta(DateTime startedTime, int totalBytesToReceive, int bytesReceived)
