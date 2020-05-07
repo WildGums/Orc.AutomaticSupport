@@ -1,10 +1,10 @@
-﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en-US")]
-[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.6", FrameworkDisplayName=".NET Framework 4.6")]
-[assembly: System.Windows.Markup.XmlnsDefinitionAttribute("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport")]
-[assembly: System.Windows.Markup.XmlnsDefinitionAttribute("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport.Views")]
-[assembly: System.Windows.Markup.XmlnsPrefixAttribute("http://schemas.wildgums.com/orc/automaticsupport", "orcautomaticsupport")]
-[assembly: System.Windows.ThemeInfoAttribute(System.Windows.ResourceDictionaryLocation.None, System.Windows.ResourceDictionaryLocation.SourceAssembly)]
-public class static ModuleInitializer
+﻿[assembly: System.Resources.NeutralResourcesLanguage("en-US")]
+[assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.7", FrameworkDisplayName=".NET Framework 4.7")]
+[assembly: System.Windows.Markup.XmlnsDefinition("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport")]
+[assembly: System.Windows.Markup.XmlnsDefinition("http://schemas.wildgums.com/orc/automaticsupport", "Orc.AutomaticSupport.Views")]
+[assembly: System.Windows.Markup.XmlnsPrefix("http://schemas.wildgums.com/orc/automaticsupport", "orcautomaticsupport")]
+[assembly: System.Windows.ThemeInfo(System.Windows.ResourceDictionaryLocation.None, System.Windows.ResourceDictionaryLocation.SourceAssembly)]
+public static class ModuleInitializer
 {
     public static void Initialize() { }
 }
@@ -24,9 +24,9 @@ namespace Orc.AutomaticSupport
     {
         string CommandLineParameters { get; set; }
         string SupportUrl { get; set; }
-        public event System.EventHandler<System.EventArgs> DownloadCompleted;
-        public event System.EventHandler<Orc.AutomaticSupport.ProgressChangedEventArgs> DownloadProgressChanged;
-        public event System.EventHandler<System.EventArgs> SupportAppClosed;
+        event System.EventHandler<System.EventArgs> DownloadCompleted;
+        event System.EventHandler<Orc.AutomaticSupport.ProgressChangedEventArgs> DownloadProgressChanged;
+        event System.EventHandler<System.EventArgs> SupportAppClosed;
         System.Threading.Tasks.Task DownloadAndRunAsync();
     }
     public class ProgressChangedEventArgs : System.EventArgs
