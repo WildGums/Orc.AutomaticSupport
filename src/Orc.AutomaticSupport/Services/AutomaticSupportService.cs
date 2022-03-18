@@ -60,6 +60,7 @@ namespace Orc.AutomaticSupport
 
             Log.Info("Downloading support app from '{0}'", SupportUrl);
 
+#pragma warning disable SYSLIB0014 // Type or member is obsolete
             using (var webClient = new WebClient())
             {
                 webClient.DownloadProgressChanged += OnWebClientOnDownloadProgressChanged;
@@ -83,6 +84,7 @@ namespace Orc.AutomaticSupport
                     _dispatcherService.BeginInvoke(() => SupportAppClosed?.Invoke(this, EventArgs.Empty));
                 });
             }
+#pragma warning restore SYSLIB0014 // Type or member is obsolete
         }
 
         private void OnWebClientOnDownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
