@@ -1,17 +1,9 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AutomaticSupportService.cs" company="WildGums">
-//   Copyright (c) 2008 - 2014 WildGums. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace Orc.AutomaticSupport
+﻿namespace Orc.AutomaticSupport
 {
     using System;
     using System.IO;
     using System.Net;
     using System.Threading.Tasks;
-    using Catel;
     using Catel.Logging;
     using Catel.Services;
     using Orc.FileSystem;
@@ -29,16 +21,17 @@ namespace Orc.AutomaticSupport
         public AutomaticSupportService(IProcessService processService, IDispatcherService dispatcherService,
             IFileService fileService, IDirectoryService directoryService)
         {
-            Argument.IsNotNull(() => processService);
-            Argument.IsNotNull(() => dispatcherService);
-            Argument.IsNotNull(() => fileService);
-            Argument.IsNotNull(() => directoryService);
+            ArgumentNullException.ThrowIfNull(processService);
+            ArgumentNullException.ThrowIfNull(dispatcherService);
+            ArgumentNullException.ThrowIfNull(fileService);
+            ArgumentNullException.ThrowIfNull(directoryService);
 
             _processService = processService;
             _dispatcherService = dispatcherService;
             _fileService = fileService;
             _directoryService = directoryService;
 
+            SupportUrl = string.Empty;
             _startedTime = DateTime.Now;
             CommandLineParameters = string.Empty;
         }
@@ -47,9 +40,9 @@ namespace Orc.AutomaticSupport
 
         public string CommandLineParameters { get; set; }
 
-        public event EventHandler<ProgressChangedEventArgs> DownloadProgressChanged;
-        public event EventHandler<EventArgs> DownloadCompleted;
-        public event EventHandler<EventArgs> SupportAppClosed;
+        public event EventHandler<ProgressChangedEventArgs>? DownloadProgressChanged;
+        public event EventHandler<EventArgs>? DownloadCompleted;
+        public event EventHandler<EventArgs>? SupportAppClosed;
 
         public async Task DownloadAndRunAsync()
         {
@@ -79,7 +72,7 @@ namespace Orc.AutomaticSupport
 
                 Log.Info("Running support app");
 
-                _processService.StartProcess(tempFile, CommandLineParameters, exitCode =>
+                _processService.StartProcess(tempFile, CommandLineParameters, (context, exitCode) =>
                 {
                     _dispatcherService.BeginInvoke(() => SupportAppClosed?.Invoke(this, EventArgs.Empty));
                 });

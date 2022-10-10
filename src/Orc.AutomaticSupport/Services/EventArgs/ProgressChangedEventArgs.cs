@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProgressChangedEventArgs.cs" company="WildGums">
-//   Copyright (c) 2008 - 2014 WildGums. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace Orc.AutomaticSupport
+﻿namespace Orc.AutomaticSupport
 {
     using System;
 
@@ -14,7 +7,6 @@ namespace Orc.AutomaticSupport
     /// </summary>
     public class ProgressChangedEventArgs : EventArgs
     {
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgressChangedEventArgs"/> class.
         /// </summary>
@@ -25,9 +17,7 @@ namespace Orc.AutomaticSupport
             Progress = progress;
             RemainingTime = remainingTime;
         }
-        #endregion
 
-        #region Properties
         /// <summary>
         /// Gets or sets the progress.
         /// </summary>
@@ -39,6 +29,5 @@ namespace Orc.AutomaticSupport
         /// </summary>
         /// <value>The remaining time.</value>
         public TimeSpan RemainingTime { get; set; }
-        #endregion
     }
 }

@@ -1,18 +1,9 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RequestSupportViewModel.cs" company="WildGums">
-//   Copyright (c) 2008 - 2014 WildGums. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace Orc.AutomaticSupport.ViewModels
+﻿namespace Orc.AutomaticSupport.ViewModels
 {
     using System;
     using System.Threading.Tasks;
-    using Catel;
     using Catel.MVVM;
     using Catel.Services;
-    using Catel.Threading;
 
     public class RequestSupportViewModel : ViewModelBase
     {
@@ -21,13 +12,14 @@ namespace Orc.AutomaticSupport.ViewModels
 
         public RequestSupportViewModel(IAutomaticSupportService automaticSupportService, ILanguageService languageService)
         {
-            Argument.IsNotNull(() => automaticSupportService);
-            Argument.IsNotNull(() => languageService);
+            ArgumentNullException.ThrowIfNull(automaticSupportService);
+            ArgumentNullException.ThrowIfNull(languageService);
 
             _automaticSupportService = automaticSupportService;
             _languageService = languageService;
 
-            Title = languageService.GetString("AutomaticSupport_AutomaticSupport");
+            RemainingTime = string.Empty;
+            Title = languageService.GetRequiredString("AutomaticSupport_AutomaticSupport");
         }
 
         public int Progress { get; private set; }
@@ -55,13 +47,13 @@ namespace Orc.AutomaticSupport.ViewModels
             await base.CloseAsync();
         }
 
-        private void OnAutomaticSupportServiceDownloadProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void OnAutomaticSupportServiceDownloadProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
             Progress = e.Progress;
-            RemainingTime = string.Format(_languageService.GetString("AutomaticSupport_RemainingTime"), e.RemainingTime);
+            RemainingTime = string.Format(_languageService.GetRequiredString("AutomaticSupport_RemainingTime"), e.RemainingTime);
         }
 
-        private void OnAutomaticSupportClosed(object sender, EventArgs e)
+        private void OnAutomaticSupportClosed(object? sender, EventArgs e)
         {
 #pragma warning disable 4014
             CloseViewModelAsync(true);

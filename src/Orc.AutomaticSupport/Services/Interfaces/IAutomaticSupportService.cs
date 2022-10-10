@@ -1,11 +1,4 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IAutomaticSupportService.cs" company="WildGums">
-//   Copyright (c) 2008 - 2014 WildGums. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace Orc.AutomaticSupport
+﻿namespace Orc.AutomaticSupport
 {
     using System;
     using System.Threading.Tasks;
@@ -26,17 +19,17 @@ namespace Orc.AutomaticSupport
         /// <summary>
         /// Occurs when the download progress has changed.
         /// </summary>
-        event EventHandler<ProgressChangedEventArgs> DownloadProgressChanged;
+        event EventHandler<ProgressChangedEventArgs>? DownloadProgressChanged;
 
         /// <summary>
         /// Occurs when the download is completed.
         /// </summary>
-        event EventHandler<EventArgs> DownloadCompleted;
+        event EventHandler<EventArgs>? DownloadCompleted;
 
         /// <summary>
         /// Occurs when when the support app is closed.
         /// </summary>
-        event EventHandler<EventArgs> SupportAppClosed;
+        event EventHandler<EventArgs>? SupportAppClosed;
 
         /// <summary>
         /// Downloads the support url file and runs the application.

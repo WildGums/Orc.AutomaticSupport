@@ -16,7 +16,7 @@ public static class ModuleInitializer
 
         serviceLocator.RegisterType<IAutomaticSupportService, AutomaticSupportService>();
 
-        var languageService = serviceLocator.ResolveType<ILanguageService>();
+        var languageService = serviceLocator.ResolveRequiredType<ILanguageService>();
         languageService.RegisterLanguageSource(new LanguageResourceSource("Orc.AutomaticSupport", "Orc.AutomaticSupport.Properties", "Resources"));
     }
 }

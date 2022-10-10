@@ -15,18 +15,18 @@ namespace Orc.AutomaticSupport
         public AutomaticSupportService(Catel.Services.IProcessService processService, Catel.Services.IDispatcherService dispatcherService, Orc.FileSystem.IFileService fileService, Orc.FileSystem.IDirectoryService directoryService) { }
         public string CommandLineParameters { get; set; }
         public string SupportUrl { get; set; }
-        public event System.EventHandler<System.EventArgs> DownloadCompleted;
-        public event System.EventHandler<Orc.AutomaticSupport.ProgressChangedEventArgs> DownloadProgressChanged;
-        public event System.EventHandler<System.EventArgs> SupportAppClosed;
+        public event System.EventHandler<System.EventArgs>? DownloadCompleted;
+        public event System.EventHandler<Orc.AutomaticSupport.ProgressChangedEventArgs>? DownloadProgressChanged;
+        public event System.EventHandler<System.EventArgs>? SupportAppClosed;
         public System.Threading.Tasks.Task DownloadAndRunAsync() { }
     }
     public interface IAutomaticSupportService
     {
         string CommandLineParameters { get; set; }
         string SupportUrl { get; set; }
-        event System.EventHandler<System.EventArgs> DownloadCompleted;
-        event System.EventHandler<Orc.AutomaticSupport.ProgressChangedEventArgs> DownloadProgressChanged;
-        event System.EventHandler<System.EventArgs> SupportAppClosed;
+        event System.EventHandler<System.EventArgs>? DownloadCompleted;
+        event System.EventHandler<Orc.AutomaticSupport.ProgressChangedEventArgs>? DownloadProgressChanged;
+        event System.EventHandler<System.EventArgs>? SupportAppClosed;
         System.Threading.Tasks.Task DownloadAndRunAsync();
     }
     public class ProgressChangedEventArgs : System.EventArgs
@@ -40,8 +40,8 @@ namespace Orc.AutomaticSupport.ViewModels
 {
     public class RequestSupportViewModel : Catel.MVVM.ViewModelBase
     {
-        public static readonly Catel.Data.PropertyData ProgressProperty;
-        public static readonly Catel.Data.PropertyData RemainingTimeProperty;
+        public static readonly Catel.Data.IPropertyData ProgressProperty;
+        public static readonly Catel.Data.IPropertyData RemainingTimeProperty;
         public RequestSupportViewModel(Orc.AutomaticSupport.IAutomaticSupportService automaticSupportService, Catel.Services.ILanguageService languageService) { }
         public int Progress { get; }
         public string RemainingTime { get; }
