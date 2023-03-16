@@ -1,40 +1,39 @@
-﻿namespace Orc.AutomaticSupport
+﻿namespace Orc.AutomaticSupport;
+
+using System;
+using System.Threading.Tasks;
+
+/// <summary>
+/// The automatic support service.
+/// </summary>
+public interface IAutomaticSupportService
 {
-    using System;
-    using System.Threading.Tasks;
+    /// <summary>
+    /// Gets or sets the support URL. This url should point to a file that can be downloaded and executed.
+    /// </summary>
+    /// <value>The support URL.</value>
+    string SupportUrl { get; set; }
+
+    string CommandLineParameters { get; set; }
 
     /// <summary>
-    /// The automatic support service.
+    /// Occurs when the download progress has changed.
     /// </summary>
-    public interface IAutomaticSupportService
-    {
-        /// <summary>
-        /// Gets or sets the support URL. This url should point to a file that can be downloaded and executed.
-        /// </summary>
-        /// <value>The support URL.</value>
-        string SupportUrl { get; set; }
+    event EventHandler<ProgressChangedEventArgs>? DownloadProgressChanged;
 
-        string CommandLineParameters { get; set; }
+    /// <summary>
+    /// Occurs when the download is completed.
+    /// </summary>
+    event EventHandler<EventArgs>? DownloadCompleted;
 
-        /// <summary>
-        /// Occurs when the download progress has changed.
-        /// </summary>
-        event EventHandler<ProgressChangedEventArgs>? DownloadProgressChanged;
+    /// <summary>
+    /// Occurs when when the support app is closed.
+    /// </summary>
+    event EventHandler<EventArgs>? SupportAppClosed;
 
-        /// <summary>
-        /// Occurs when the download is completed.
-        /// </summary>
-        event EventHandler<EventArgs>? DownloadCompleted;
-
-        /// <summary>
-        /// Occurs when when the support app is closed.
-        /// </summary>
-        event EventHandler<EventArgs>? SupportAppClosed;
-
-        /// <summary>
-        /// Downloads the support url file and runs the application.
-        /// </summary>
-        /// <returns>Task.</returns>
-        Task DownloadAndRunAsync();
-    }
+    /// <summary>
+    /// Downloads the support url file and runs the application.
+    /// </summary>
+    /// <returns>Task.</returns>
+    Task DownloadAndRunAsync();
 }
