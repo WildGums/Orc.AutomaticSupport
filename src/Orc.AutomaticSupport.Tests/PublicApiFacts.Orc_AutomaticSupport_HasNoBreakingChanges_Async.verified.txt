@@ -45,6 +45,7 @@ namespace Orc.AutomaticSupport.ViewModels
         public RequestSupportViewModel(Orc.AutomaticSupport.IAutomaticSupportService automaticSupportService, Catel.Services.ILanguageService languageService) { }
         public int Progress { get; }
         public string RemainingTime { get; }
+        public override string Title { get; }
         protected override System.Threading.Tasks.Task CloseAsync() { }
         protected override System.Threading.Tasks.Task InitializeAsync() { }
     }
