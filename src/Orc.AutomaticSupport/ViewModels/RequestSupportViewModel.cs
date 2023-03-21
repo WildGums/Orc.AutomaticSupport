@@ -19,8 +19,9 @@ public class RequestSupportViewModel : ViewModelBase
         _languageService = languageService;
 
         RemainingTime = string.Empty;
-        Title = languageService.GetRequiredString("AutomaticSupport_AutomaticSupport");
     }
+
+    public override string Title => _languageService.GetRequiredString("AutomaticSupport_AutomaticSupport");
 
     public int Progress { get; private set; }
 

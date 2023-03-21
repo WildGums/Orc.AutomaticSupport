@@ -54,29 +54,27 @@ public class AutomaticSupportService : IAutomaticSupportService
         Log.Info("Downloading support app from '{0}'", SupportUrl);
 
 #pragma warning disable SYSLIB0014 // Type or member is obsolete
-        using (var webClient = new WebClient())
+        using var webClient = new WebClient();
+        webClient.DownloadProgressChanged += OnWebClientOnDownloadProgressChanged;
+        webClient.DownloadDataCompleted += OnWebClientOnDownloadDataCompleted;
+
+        var data = await webClient.DownloadDataTaskAsync(SupportUrl);
+
+        Log.Info("Support app is downloaded, storing file in temporary folder");
+
+        var tempDirectory = Path.Combine(Path.GetTempPath(), "Orc_AutomaticSupport", DateTime.Now.ToString("yyyyMMddHHmmss"));
+        _directoryService.Create(tempDirectory);
+
+        var tempFile = Path.Combine(tempDirectory, "SupportApp.exe");
+
+        await _fileService.WriteAllBytesAsync(tempFile, data);
+
+        Log.Info("Running support app");
+
+        _processService.StartProcess(tempFile, CommandLineParameters, (_, _) =>
         {
-            webClient.DownloadProgressChanged += OnWebClientOnDownloadProgressChanged;
-            webClient.DownloadDataCompleted += OnWebClientOnDownloadDataCompleted;
-
-            var data = await webClient.DownloadDataTaskAsync(SupportUrl);
-
-            Log.Info("Support app is downloaded, storing file in temporary folder");
-
-            var tempDirectory = Path.Combine(Path.GetTempPath(), "Orc_AutomaticSupport", DateTime.Now.ToString("yyyyMMddHHmmss"));
-            _directoryService.Create(tempDirectory);
-
-            var tempFile = Path.Combine(tempDirectory, "SupportApp.exe");
-
-            await _fileService.WriteAllBytesAsync(tempFile, data);
-
-            Log.Info("Running support app");
-
-            _processService.StartProcess(tempFile, CommandLineParameters, (context, exitCode) =>
-            {
-                _dispatcherService.BeginInvoke(() => SupportAppClosed?.Invoke(this, EventArgs.Empty));
-            });
-        }
+            _dispatcherService.BeginInvoke(() => SupportAppClosed?.Invoke(this, EventArgs.Empty));
+        });
 #pragma warning restore SYSLIB0014 // Type or member is obsolete
     }
 
@@ -96,7 +94,7 @@ public class AutomaticSupportService : IAutomaticSupportService
         DownloadProgressChanged?.Invoke(this, new ProgressChangedEventArgs(e.ProgressPercentage, remainingTime));
     }
 
-    private TimeSpan CalculateEta(DateTime startedTime, int totalBytesToReceive, int bytesReceived)
+    private static TimeSpan CalculateEta(DateTime startedTime, int totalBytesToReceive, int bytesReceived)
     {
         var duration = (int)(DateTime.Now - startedTime).TotalSeconds;
         if (duration == 0)
