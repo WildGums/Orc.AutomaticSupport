@@ -1,71 +1,63 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RequestSupportViewModel.cs" company="WildGums">
-//   Copyright (c) 2008 - 2014 WildGums. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿namespace Orc.AutomaticSupport.ViewModels;
 
+using System;
+using System.Threading.Tasks;
+using Catel.MVVM;
+using Catel.Services;
 
-namespace Orc.AutomaticSupport.ViewModels
+public class RequestSupportViewModel : ViewModelBase
 {
-    using System;
-    using System.Threading.Tasks;
-    using Catel;
-    using Catel.MVVM;
-    using Catel.Services;
-    using Catel.Threading;
+    private readonly IAutomaticSupportService _automaticSupportService;
+    private readonly ILanguageService _languageService;
 
-    public class RequestSupportViewModel : ViewModelBase
+    public RequestSupportViewModel(IAutomaticSupportService automaticSupportService, ILanguageService languageService)
     {
-        private readonly IAutomaticSupportService _automaticSupportService;
-        private readonly ILanguageService _languageService;
+        ArgumentNullException.ThrowIfNull(automaticSupportService);
+        ArgumentNullException.ThrowIfNull(languageService);
 
-        public RequestSupportViewModel(IAutomaticSupportService automaticSupportService, ILanguageService languageService)
-        {
-            Argument.IsNotNull(() => automaticSupportService);
-            Argument.IsNotNull(() => languageService);
+        _automaticSupportService = automaticSupportService;
+        _languageService = languageService;
 
-            _automaticSupportService = automaticSupportService;
-            _languageService = languageService;
+        RemainingTime = string.Empty;
+    }
 
-            Title = languageService.GetString("AutomaticSupport_AutomaticSupport");
-        }
+    public override string Title => _languageService.GetRequiredString("AutomaticSupport_AutomaticSupport");
 
-        public int Progress { get; private set; }
+    public int Progress { get; private set; }
 
-        public string RemainingTime { get; private set; }
+    public string RemainingTime { get; private set; }
 
-        protected override async Task InitializeAsync()
-        {
-            await base.InitializeAsync();
+    protected override async Task InitializeAsync()
+    {
+        await base.InitializeAsync();
 
-            _automaticSupportService.DownloadProgressChanged += OnAutomaticSupportServiceDownloadProgressChanged;
-            _automaticSupportService.SupportAppClosed += OnAutomaticSupportClosed;
+        _automaticSupportService.DownloadProgressChanged += OnAutomaticSupportServiceDownloadProgressChanged;
+        _automaticSupportService.SupportAppClosed += OnAutomaticSupportClosed;
 
-            // Note: don't await, let it run by itself
+        // Note: don't await, let it run by itself
 #pragma warning disable 4014
-            _automaticSupportService.DownloadAndRunAsync();
+        _automaticSupportService.DownloadAndRunAsync();
 #pragma warning restore 4014
-        }
+    }
 
-        protected override async Task CloseAsync()
-        {
-            _automaticSupportService.DownloadProgressChanged -= OnAutomaticSupportServiceDownloadProgressChanged;
-            _automaticSupportService.SupportAppClosed -= OnAutomaticSupportClosed;
+    protected override async Task CloseAsync()
+    {
+        _automaticSupportService.DownloadProgressChanged -= OnAutomaticSupportServiceDownloadProgressChanged;
+        _automaticSupportService.SupportAppClosed -= OnAutomaticSupportClosed;
 
-            await base.CloseAsync();
-        }
+        await base.CloseAsync();
+    }
 
-        private void OnAutomaticSupportServiceDownloadProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            Progress = e.Progress;
-            RemainingTime = string.Format(_languageService.GetString("AutomaticSupport_RemainingTime"), e.RemainingTime);
-        }
+    private void OnAutomaticSupportServiceDownloadProgressChanged(object? sender, ProgressChangedEventArgs e)
+    {
+        Progress = e.Progress;
+        RemainingTime = string.Format(_languageService.GetRequiredString("AutomaticSupport_RemainingTime"), e.RemainingTime);
+    }
 
-        private void OnAutomaticSupportClosed(object sender, EventArgs e)
-        {
+    private void OnAutomaticSupportClosed(object? sender, EventArgs e)
+    {
 #pragma warning disable 4014
-            CloseViewModelAsync(true);
+        CloseViewModelAsync(true);
 #pragma warning restore 4014
-        }
     }
 }
