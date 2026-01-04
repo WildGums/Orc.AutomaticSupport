@@ -7,25 +7,22 @@ using System.Threading.Tasks;
 using Catel.Logging;
 using Catel.Services;
 using FileSystem;
+using Microsoft.Extensions.Logging;
 
 public class AutomaticSupportService : IAutomaticSupportService
 {
-    private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-
     private readonly IDispatcherService _dispatcherService;
     private readonly IFileService _fileService;
     private readonly IDirectoryService _directoryService;
+    private readonly ILogger<AutomaticSupportService> _logger;
     private readonly IProcessService _processService;
     private readonly DateTime _startedTime;
 
-    public AutomaticSupportService(IProcessService processService, IDispatcherService dispatcherService,
+    public AutomaticSupportService(ILogger<AutomaticSupportService> logger, 
+        IProcessService processService, IDispatcherService dispatcherService,
         IFileService fileService, IDirectoryService directoryService)
     {
-        ArgumentNullException.ThrowIfNull(processService);
-        ArgumentNullException.ThrowIfNull(dispatcherService);
-        ArgumentNullException.ThrowIfNull(fileService);
-        ArgumentNullException.ThrowIfNull(directoryService);
-
+        _logger = logger;
         _processService = processService;
         _dispatcherService = dispatcherService;
         _fileService = fileService;
@@ -48,10 +45,10 @@ public class AutomaticSupportService : IAutomaticSupportService
     {
         if (string.IsNullOrWhiteSpace(SupportUrl))
         {
-            throw Log.ErrorAndCreateException<InvalidOperationException>("Please initialize the service by setting the SupportUrl property");
+            throw _logger.LogErrorAndCreateException<InvalidOperationException>("Please initialize the service by setting the SupportUrl property");
         }
 
-        Log.Info("Downloading support app from '{0}'", SupportUrl);
+        _logger.LogInformation("Downloading support app from '{0}'", SupportUrl);
 
 #pragma warning disable SYSLIB0014 // Type or member is obsolete
         using var webClient = new WebClient();
@@ -60,7 +57,7 @@ public class AutomaticSupportService : IAutomaticSupportService
 
         var data = await webClient.DownloadDataTaskAsync(SupportUrl);
 
-        Log.Info("Support app is downloaded, storing file in temporary folder");
+        _logger.LogInformation("Support app is downloaded, storing file in temporary folder");
 
         var tempDirectory = Path.Combine(Path.GetTempPath(), "Orc_AutomaticSupport", DateTime.Now.ToString("yyyyMMddHHmmss"));
         _directoryService.Create(tempDirectory);
@@ -69,7 +66,7 @@ public class AutomaticSupportService : IAutomaticSupportService
 
         await _fileService.WriteAllBytesAsync(tempFile, data);
 
-        Log.Info("Running support app");
+        _logger.LogInformation("Running support app");
 
         _processService.StartProcess(tempFile, CommandLineParameters, (_, _) =>
         {

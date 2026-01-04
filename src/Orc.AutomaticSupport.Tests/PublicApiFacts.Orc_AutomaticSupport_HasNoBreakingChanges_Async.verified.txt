@@ -13,7 +13,7 @@ namespace Orc.AutomaticSupport
 {
     public class AutomaticSupportService : Orc.AutomaticSupport.IAutomaticSupportService
     {
-        public AutomaticSupportService(Catel.Services.IProcessService processService, Catel.Services.IDispatcherService dispatcherService, Orc.FileSystem.IFileService fileService, Orc.FileSystem.IDirectoryService directoryService) { }
+        public AutomaticSupportService(Microsoft.Extensions.Logging.ILogger<Orc.AutomaticSupport.AutomaticSupportService> logger, Catel.Services.IProcessService processService, Catel.Services.IDispatcherService dispatcherService, Orc.FileSystem.IFileService fileService, Orc.FileSystem.IDirectoryService directoryService) { }
         public string CommandLineParameters { get; set; }
         public string SupportUrl { get; set; }
         public event System.EventHandler<System.EventArgs>? DownloadCompleted;
@@ -30,6 +30,10 @@ namespace Orc.AutomaticSupport
         event System.EventHandler<System.EventArgs>? SupportAppClosed;
         System.Threading.Tasks.Task DownloadAndRunAsync();
     }
+    public static class OrcAutomaticSupportModule
+    {
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddOrcAutomaticSupport(this Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection) { }
+    }
     public class ProgressChangedEventArgs : System.EventArgs
     {
         public ProgressChangedEventArgs(int progress, System.TimeSpan remainingTime) { }
@@ -43,7 +47,7 @@ namespace Orc.AutomaticSupport.ViewModels
     {
         public static readonly Catel.Data.IPropertyData ProgressProperty;
         public static readonly Catel.Data.IPropertyData RemainingTimeProperty;
-        public RequestSupportViewModel(Orc.AutomaticSupport.IAutomaticSupportService automaticSupportService, Catel.Services.ILanguageService languageService) { }
+        public RequestSupportViewModel(System.IServiceProvider serviceProvider, Orc.AutomaticSupport.IAutomaticSupportService automaticSupportService, Catel.Services.ILanguageService languageService) { }
         public int Progress { get; }
         public string RemainingTime { get; }
         public override string Title { get; }
@@ -56,6 +60,8 @@ namespace Orc.AutomaticSupport.Views
     public class RequestSupportView : Catel.Windows.Window, System.Windows.Markup.IComponentConnector
     {
         public RequestSupportView() { }
+        [Microsoft.Extensions.DependencyInjection.ActivatorUtilitiesConstructor]
+        public RequestSupportView(System.IServiceProvider serviceProvider, Catel.Services.IWrapControlService wrapControlService, Catel.Services.ILanguageService languageService) { }
         public void InitializeComponent() { }
     }
 }
