@@ -30,10 +30,6 @@ namespace Orc.AutomaticSupport
         event System.EventHandler<System.EventArgs>? SupportAppClosed;
         System.Threading.Tasks.Task DownloadAndRunAsync();
     }
-    public static class OrcAutomaticSupportModule
-    {
-        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddOrcAutomaticSupport(this Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection) { }
-    }
     public class ProgressChangedEventArgs : System.EventArgs
     {
         public ProgressChangedEventArgs(int progress, System.TimeSpan remainingTime) { }
@@ -63,5 +59,12 @@ namespace Orc.AutomaticSupport.Views
         [Microsoft.Extensions.DependencyInjection.ActivatorUtilitiesConstructor]
         public RequestSupportView(System.IServiceProvider serviceProvider, Catel.Services.IWrapControlService wrapControlService, Catel.Services.ILanguageService languageService) { }
         public void InitializeComponent() { }
+    }
+}
+namespace Orc
+{
+    public static class OrcAutomaticSupportModule
+    {
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddOrcAutomaticSupport(this Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection) { }
     }
 }
