@@ -56,8 +56,8 @@ namespace Orc.AutomaticSupport.Views
     public class RequestSupportView : Catel.Windows.Window, System.Windows.Markup.IComponentConnector
     {
         public RequestSupportView() { }
-        [Microsoft.Extensions.DependencyInjection.ActivatorUtilitiesConstructor]
         public RequestSupportView(System.IServiceProvider serviceProvider, Catel.Services.IWrapControlService wrapControlService, Catel.Services.ILanguageService languageService) { }
+        public RequestSupportView(Catel.MVVM.IViewModel? viewModel, System.IServiceProvider serviceProvider, Catel.Services.IWrapControlService wrapControlService, Catel.Services.ILanguageService languageService) { }
         public void InitializeComponent() { }
     }
 }
