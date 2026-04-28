@@ -10,11 +10,10 @@ public class RequestSupportViewModel : ViewModelBase
     private readonly IAutomaticSupportService _automaticSupportService;
     private readonly ILanguageService _languageService;
 
-    public RequestSupportViewModel(IAutomaticSupportService automaticSupportService, ILanguageService languageService)
+    public RequestSupportViewModel(IServiceProvider serviceProvider, 
+        IAutomaticSupportService automaticSupportService, ILanguageService languageService)
+        : base(serviceProvider)
     {
-        ArgumentNullException.ThrowIfNull(automaticSupportService);
-        ArgumentNullException.ThrowIfNull(languageService);
-
         _automaticSupportService = automaticSupportService;
         _languageService = languageService;
 
