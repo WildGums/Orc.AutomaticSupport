@@ -48,7 +48,7 @@ public class AutomaticSupportService : IAutomaticSupportService
             throw _logger.LogErrorAndCreateException<InvalidOperationException>("Please initialize the service by setting the SupportUrl property");
         }
 
-        _logger.LogInformation("Downloading support app from '{0}'", SupportUrl);
+        _logger.LogInformation("Downloading support app from '{SupportUrl}'", SupportUrl);
 
 #pragma warning disable SYSLIB0014 // Type or member is obsolete
         using var webClient = new WebClient();
